@@ -1,6 +1,5 @@
 ﻿using ApplicationCore.Bases;
 using ApplicationCore.Data;
-using ApplicationManager.Bases;
 using Log;
 using Log.Data;
 using System;

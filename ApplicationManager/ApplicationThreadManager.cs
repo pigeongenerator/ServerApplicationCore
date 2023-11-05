@@ -17,7 +17,7 @@ internal static class ApplicationThreadManager
         Thread thread = new(() => TryRun(action, stateWhenRan, application));
         thread.Name = application.GetType().Name;
 
-        application.Log.Write($"{stateWhenRan} {application.LogSourceName}", LogSeverity.Info);
+        application.Log.Write($"{stateWhenRan} {application.LogSourceName} v{application.Version}", LogSeverity.Info);
         thread.Start();
 
         return thread;

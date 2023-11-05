@@ -10,13 +10,19 @@ namespace ApplicationCore.Bases;
 /// </summary>
 public abstract class Application : LoggableObject
 {
+    private static uint _instanceCount = 0; 
+
     private AppState _state;
+    private readonly uint _id;
+    private readonly Version _version;
     private readonly Action _startAction;
     private readonly Action _stopAction;
 
     //called when the class is constructed
-    protected Application(string? logName = null) : base(logName)
+    protected Application(Version version, string? logName = null) : base(logName)
     {
+        _id = _instanceCount; //set the ID to the amount of instances there were before this was created
+        _version = version; //set the version
         _state = AppState.Stopped;
 
         ApplicationManager.Applications.Add(this); //add the application to the applications
@@ -29,6 +35,9 @@ public abstract class Application : LoggableObject
         EventManager eventManager = EventManager.Instance;
         eventManager.StartEvent += _startAction;
         eventManager.StopEvent += _stopAction;
+
+        //increase the instance count
+        _instanceCount++;
     }
 
     //is called when the class is deconstructed
@@ -65,6 +74,20 @@ public abstract class Application : LoggableObject
     public AppState State {
         get => _state;
         internal set => _state = value;
+    }
+
+    /// <summary>
+    /// holds the version of this application
+    /// </summary>
+    public Version Version {
+        get => _version;
+    }
+
+    /// <summary>
+    /// Saves the ID of this application
+    /// </summary>
+    public uint Id {
+        get => _id;
     }
 
     public static T? FindApplicationOfType<T>() where T : Application
