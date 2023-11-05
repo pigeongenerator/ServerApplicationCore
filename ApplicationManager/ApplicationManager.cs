@@ -17,6 +17,7 @@ public class ApplicationManager
     private readonly static Version _version = new(5, 0);   //the current version of the application
     private static ApplicationManager? _instance;           //the instance of the application manager
 
+    private readonly string _
     private readonly ManualResetEvent _shutDownEvent;   //the thread until the application has shut down
     private readonly List<Application> _applications;   //the applications that are currently active
     private readonly EventManager _eventManager;        //manages startup and shutdown events within the application
@@ -60,6 +61,8 @@ public class ApplicationManager
     }
     #endregion
 
+    #region methods
+    #region startup/shutdown
     /// <summary>
     /// runs the application
     /// </summary>
@@ -89,6 +92,7 @@ public class ApplicationManager
         //communicate that the application has shut down
         _shutDownEvent.Set();
     }
+    #endregion
 
     //holds the logic for when the application exists
     private void AwaitExit()
@@ -98,10 +102,17 @@ public class ApplicationManager
         Task.Delay(ExitDelay).Wait(); //delay exit, to make sure all logs have been written
     }
 
+    private void InitApplications()
+    {
+    }
+
+    #region error handling
     //handles unhandled exceptions
     private void ErrorHandler(object sender, UnhandledExceptionEventArgs exception)
     {
         _log.WriteFatal($"There was an unhandled exception! {exception.ExceptionObject}");
         Task.Delay(ExitDelay).Wait(); //delay exit, to make sure all logs have been written
     }
+    #endregion
+    #endregion
 }
