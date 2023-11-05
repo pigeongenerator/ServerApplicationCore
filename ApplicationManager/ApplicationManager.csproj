@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Log">
+      <HintPath>..\..\ServerApplication_v4\Logger\bin\Release\net6.0\Log.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
