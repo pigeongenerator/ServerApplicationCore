@@ -24,6 +24,7 @@ public abstract class Application : LoggableObject, IPlugin {
         get => ApplicationManager.Instance;
     }
 
+    #region application finding
     public static Application? FindApplicationOfType<T>() where T : Application, new() {
         return ApplicationManager.FindApplicationOfType<T>();
     }
@@ -31,6 +32,7 @@ public abstract class Application : LoggableObject, IPlugin {
     public static IEnumerable<Application> FindApplicationsOfType<T>() where T : Application, new() {
         return ApplicationManager.FindApplicationsOfType<T>();
     }
+    #endregion //application finding
 
     public override void Dispose() {
         if (_disposed == true) {
