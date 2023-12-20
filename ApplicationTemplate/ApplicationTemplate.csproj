@@ -4,12 +4,16 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<AssemblyVersion>1.0</AssemblyVersion>
+		<AssemblyVersion>0.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <Reference Include="ApplicationCore">
 	    <HintPath>..\ApplicationManager\bin\Release\net6.0\ApplicationCore.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Dependencies\" />
 	</ItemGroup>
 </Project>
