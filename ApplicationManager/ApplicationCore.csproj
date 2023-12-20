@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-<<<<<<< Updated upstream
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -8,23 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Log">
-      <HintPath>..\..\ServerApplication_v4\Logger\bin\Release\net6.0\Log.dll</HintPath>
+    <Reference Include="Logger">
+      <HintPath>..\..\..\Testing\ServerApplication\ServerApplication\Dependencies\Logger.dll</HintPath>
     </Reference>
   </ItemGroup>
-=======
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>disable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<AssemblyVersion>5.1</AssemblyVersion>
-		<OutputType>Exe</OutputType>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<Reference Include="Log">
-			<HintPath>..\Libraries\Logger.dll</HintPath>
-		</Reference>
-	</ItemGroup>
->>>>>>> Stashed changes
 </Project>
