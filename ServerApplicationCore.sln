@@ -5,7 +5,11 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "ApplicationManager\ApplicationCore.csproj", "{5FCD8365-FD51-48CE-A230-A425F0FEFA5D}"
 EndProject
+<<<<<<< Updated upstream
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationTemplate", "ApplicationTemplate\ApplicationTemplate.csproj", "{AF77C374-DFE9-44F9-8D0B-8D390EB0617D}"
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate", "ApplicationTemplate\ApplicationTemplate.csproj", "{AF77C374-DFE9-44F9-8D0B-8D390EB0617D}"
+>>>>>>> Stashed changes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

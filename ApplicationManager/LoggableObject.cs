@@ -2,45 +2,33 @@
 using Log.Data;
 using System;
 
-namespace ApplicationCore.Bases;
-
-/// <summary>
-/// defines an object that can generate logs
-/// </summary>
-public abstract class LoggableObject : IDisposable
-{
+namespace ApplicationCore;
+public abstract class LoggableObject : IDisposable {
     private readonly string _logSourceName;
     private readonly Logger _log;
+    private bool _disposed;
 
-    public LoggableObject(string? sourceName = null)
-    {
+    public LoggableObject(string? sourceName = null) {
         _logSourceName = sourceName ?? GetType().Name;
-
-        LogManager logManager = ApplicationManager.Instance.LogManager; //get the log manager
-        _log = logManager.CreateLogger(_logSourceName); //create a logger for this application
+        _log = ApplicationManager.Instance.LogManager.CreateLogger(_logSourceName);
+        _disposed = false;
     }
 
-    //finalizer
-    ~LoggableObject()
-    {
-        Dispose();
+    ~LoggableObject() {
+        if (_disposed == false) {
+            Dispose();
+        }
     }
 
-    /// <summary>
-    /// gets the name of what the source is of this loggable object
-    /// </summary>
     public string LogSourceName {
         get => _logSourceName;
     }
 
-    /// <summary>
-    /// gets the logger
-    /// </summary>
     public Logger Log {
         get => _log;
     }
 
-    //short-hand for log methods
+    //short-hands for log methods
     public void Write(LogEntry entry) => _log.Write(entry);
     public void Write(string message, LogSeverity severity) => _log.Write(message, severity);
     public void WriteInfo(string message) => _log.WriteInfo(message);
@@ -49,10 +37,13 @@ public abstract class LoggableObject : IDisposable
     public void WriteError(string message) => _log.WriteError(message);
     public void WriteFatal(string message) => _log.WriteFatal(message);
 
-    //TDOD: make sure dispose isn't called twice
-    public virtual void Dispose()
-    {
+    public virtual void Dispose() {
+        if (_disposed == true) {
+            throw new Exception($"{nameof(LogManager)} has already been disposed");
+        }
+
+        _disposed = true;
         GC.SuppressFinalize(this);
-        _log.Dispose();
+        ApplicationManager.Instance.LogManager.DestroyLogger(_logSourceName);
     }
 }
