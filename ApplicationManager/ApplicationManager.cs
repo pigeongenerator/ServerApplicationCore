@@ -49,21 +49,30 @@ public class ApplicationManager : IDisposable {
         Initialize();
         Start();
         _shutdownEvent.WaitOne();
+        Log.WriteInfo("The application shut down successfully!");
+        Thread.Sleep(EXIT_DELAY); //delay exit, to make sure all logs have been written
     }
 
-    public void Stop() {
+    public void Stop(bool exitProgram = true) {
         List<Task> shutdownTask = new();
+        Log.WriteInfo("stopping apps...");
         for (int i = 0; i < _applications.Count; i++) {
             Log.WriteInfo($"{(float)i / _applications.Count * 100}% stopping app '{_applications[i].GetType().FullName}'...");
             shutdownTask.Add(_applications[i].Stop());
         }
 
         Task.WhenAll(shutdownTask);
+        Dispose();
+
         Log.WriteInfo("done!");
-        _shutdownEvent.Set();
+
+        if (exitProgram) {
+            _shutdownEvent.Set();
+        }
     }
 
     private void Start() {
+        Log.WriteInfo("starting apps...");
         for (int i = 0; i < _applications.Count; i++) {
             Log.WriteInfo($"{(float)i / _applications.Count * 100}% starting app '{_applications[i].GetType().FullName}'...");
             _applications[i].Main();
@@ -74,7 +83,9 @@ public class ApplicationManager : IDisposable {
     #endregion //startup / shutdown
 
     private void Initialize() {
-        string[] applicationPaths = Directory.GetFiles(APPLICATION_DIRECTORY, "*.dll");
+        string directoryPath = Path.GetFullPath(APPLICATION_DIRECTORY);
+        Directory.CreateDirectory(directoryPath);
+        string[] applicationPaths = Directory.GetFiles(directoryPath, "*.dll");
         foreach (string path in applicationPaths) {
             Assembly assembly = Assembly.LoadFile(path);
             foreach (Type type in assembly.GetTypes().Where(type => typeof(Application).IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface)) {
@@ -115,8 +126,7 @@ public class ApplicationManager : IDisposable {
     //handles unhandled exceptions
     private void ErrorHandler(object sender, UnhandledExceptionEventArgs exception) {
         _log.WriteFatal($"There was an unhandled exception! {exception.ExceptionObject}");
-        Task.Delay(EXIT_DELAY).Wait(); //delay exit, to make sure all logs have been written
-
+        Thread.Sleep(EXIT_DELAY); //delay exit, to make sure all logs have been written
     }
 
     public void Dispose() {

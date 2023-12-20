@@ -1,14 +1,15 @@
-﻿using ApplicationCore.Bases;
+﻿using ApplicationCore;
+using System.Threading.Tasks;
 
 namespace ApplicationTemplate;
 public class ApplicationTemplateApp : Application {
     //called when the application starts
-    protected override void Main() {
-        throw new System.NotImplementedException();
+    public async override Task Main() {
+        await Task.Delay(-1);
     }
     
     //called when the application stops
-    protected override void Stop() {
+    public override Task Stop() {
         throw new System.NotImplementedException();
     }
 }

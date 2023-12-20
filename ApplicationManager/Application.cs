@@ -6,7 +6,7 @@ namespace ApplicationCore;
 public abstract class Application : LoggableObject, IPlugin {
     private bool _disposed;
 
-    internal Application() : base() {
+    protected internal Application() : base() {
         _disposed = false;
     }
 
