@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -89,7 +90,7 @@ public class ApplicationManager : IDisposable {
             _applications[i].Main();
         }
 
-        Log.WriteInfo("done!");
+        Log.WriteInfo("100% done!");
     }
     #endregion //startup / shutdown
 
@@ -98,11 +99,11 @@ public class ApplicationManager : IDisposable {
         //get '.dll' paths
         string directoryPath = Path.GetFullPath(APPLICATION_DIRECTORY); //correct the path
         Directory.CreateDirectory(directoryPath); //create a directory if it doesn't exist yet
-        string[] applicationPaths = Directory.GetFiles(directoryPath, "*.dll"); //find the files that end with '.dll'
 
         //load the assemblies
-        foreach (string path in applicationPaths) {
-            Assembly assembly = Assembly.LoadFile(path);
+        foreach (string dll in Directory.GetFiles(directoryPath, "*.dll")) {
+            AssemblyLoadContext assemblyLoadContext = new(dll);
+            Assembly assembly = assemblyLoadContext.LoadFromAssemblyPath(dll);
 
             //load the applications
             foreach (Type type in assembly.GetTypes().Where(type => typeof(Application).IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface)) {

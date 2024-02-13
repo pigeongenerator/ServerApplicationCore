@@ -1,10 +1,19 @@
-﻿using Log.Data;
+﻿using ConsoleApp;
+using Log.Data;
 using System;
 
 namespace ApplicationCore;
 internal class Program {
     //entry-point of the application
     public static void Main() {
+        //init console
+        Console.ResetColor(); //reset console colour
+        Console.Clear(); //clear the console
+        Console.CursorVisible = false; //set the cursor visibility to false
+        Console.In.Dispose(); //dispose the input stream as we won't need it
+        LogFileManager logFileManager = new("./logs");
+
+        //
         using ApplicationManager applicationManager = ApplicationManager.Instance; //get the application manager
         applicationManager.LogManager.ReceivedEntry += ConsoleWriter; //add the event listener
         applicationManager.Run(); //run the application

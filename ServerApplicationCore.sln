@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate", "ApplicationTemplate\ApplicationTemplate.csproj", "{AF77C374-DFE9-44F9-8D0B-8D390EB0617D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinecraftApp", "..\MinecraftApp\MinecraftApp\MinecraftApp.csproj", "{860BD308-2D14-408C-ACFF-60DF2F54C14A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AF77C374-DFE9-44F9-8D0B-8D390EB0617D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF77C374-DFE9-44F9-8D0B-8D390EB0617D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF77C374-DFE9-44F9-8D0B-8D390EB0617D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{860BD308-2D14-408C-ACFF-60DF2F54C14A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{860BD308-2D14-408C-ACFF-60DF2F54C14A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{860BD308-2D14-408C-ACFF-60DF2F54C14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{860BD308-2D14-408C-ACFF-60DF2F54C14A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
